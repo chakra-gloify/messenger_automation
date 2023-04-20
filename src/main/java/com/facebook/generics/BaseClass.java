@@ -16,16 +16,12 @@ import com.facebook.pom.Login;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
-	static {
-		WebDriverManager.chromedriver().setup();
-	}
-
-	public static WebDriver driver;
 	
+	public static WebDriver driver;	
 
 	@BeforeClass
 	public void openBrowser() {
-
+		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver(notificationPopup());			
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
@@ -48,12 +44,12 @@ public class BaseClass {
 		driver.get(url);
 		Login l=new Login(driver);
 		l.getEmailTxtBox().sendKeys(email);
-		Thread.sleep(5000);
-		//driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		//Thread.sleep(5000);
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		l.getPwdTxtBox().sendKeys(pwd);
-		Thread.sleep(5000);
-		//driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		//Thread.sleep(5000);
 		l.getLoginBtn().click();
 	}
 
@@ -61,11 +57,11 @@ public class BaseClass {
 	public void logOut() throws InterruptedException {
 		
 		HomePage h=new HomePage(driver);
-		Thread.sleep(5000);
-		//driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		//Thread.sleep(5000);
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		h.getUserImg().click();
-		Thread.sleep(5000);
-		//driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		//Thread.sleep(5000);
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		h.getLogOutBtn().click();
 	}
 
